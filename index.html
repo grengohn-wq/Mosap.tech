@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="منصة شاملة لمعالجة الصور - ضغط، تحويل، قص، تدوير، علامات مائية، والمزيد. أدوات احترافية مجانية لمعالجة الصور أونلاين">
+    <meta name="keywords" content="معالجة الصور، ضغط الصور، تحويل الصور، قص الصور، تدوير الصور، علامة مائية، أدوات مجانية">
+    <meta name="author" content="Mosap.tech">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="منصة أدوات الصور | Mosap.tech">
+    <meta property="og:description" content="منصة شاملة لمعالجة الصور - ضغط، تحويل، قص، تدوير، والمزيد من الأدوات المجانية">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mosap.tech">
+    <meta property="og:image" content="assets/images/og-image.jpg">
+    
+    <title>منصة أدوات الصور الشاملة | Mosap.tech</title>
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2108027030250763" crossorigin="anonymous"></script>
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    
+    <!-- External Libraries -->
+    <script src="https://unpkg.com/compressorjs@1.2.1/dist/compressor.min.js" defer></script>
+    <script src="https://unpkg.com/qrcode@1.5.3/build/qrcode.min.js" defer></script>
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="css/style.css" as="style">
+    <link rel="preload" href="js/simple-main.js" as="script">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-image"></i>
+                    <span>أدوات الصور</span>
+                </div>
+                <nav class="nav">
+                    <a href="#home" class="nav-link active">الرئيسية</a>
+                    <a href="#tools" class="nav-link">الأدوات</a>
+                    <a href="#about" class="nav-link">حول الموقع</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Google AdSense - Header Banner -->
+    <div class="ad-container ad-header">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-2108027030250763"
+             data-ad-slot="1234567890"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Hero Section -->
+            <section id="home" class="hero">
+                <div class="hero-content">
+                    <h1 class="hero-title">منصة أدوات الصور الشاملة</h1>
+                    <p class="hero-subtitle">ضغط، تحويل، قص، تدوير، وإضافة علامات مائية لصورك بطريقة احترافية ومجانية</p>
+                    <div class="hero-features">
+                        <div class="feature">
+                            <i class="fas fa-compress"></i>
+                            <span>ضغط ذكي</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-exchange-alt"></i>
+                            <span>تحويل الصيغ</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-crop"></i>
+                            <span>قص وتدوير</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-palette"></i>
+                            <span>استخراج الألوان</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tools Navigation -->
+            <section id="tools" class="tools-section">
+                <div class="tools-header">
+                    <h2>اختر الأداة المناسبة</h2>
+                    <p>جميع الأدوات تعمل في متصفحك بدون رفع الصور إلى الخادم</p>
+                </div>
+
+                <!-- Tools Categories -->
+                <div class="tools-categories">
+                    <!-- Optimization Tools -->
+                    <div class="category-card" data-category="optimization">
+                        <div class="category-header">
+                            <i class="fas fa-optimize"></i>
+                            <h3>أدوات التحسين</h3>
+                        </div>
+                        <div class="category-tools">
+                            <button class="tool-btn" data-tool="compressor">
+                                <i class="fas fa-compress-arrows-alt"></i>
+                                <span>ضاغط الصور</span>
+                            </button>
+                            <button class="tool-btn" data-tool="converter">
+                                <i class="fas fa-exchange-alt"></i>
+                                <span>محول الصيغ</span>
+                            </button>
+                            <button class="tool-btn" data-tool="resizer">
+                                <i class="fas fa-expand-arrows-alt"></i>
+                                <span>مغير الحجم</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Editing Tools -->
+                    <div class="category-card" data-category="editing">
+                        <div class="category-header">
+                            <i class="fas fa-edit"></i>
+                            <h3>أدوات التعديل</h3>
+                        </div>
+                        <div class="category-tools">
+                            <button class="tool-btn" data-tool="cropper">
+                                <i class="fas fa-crop"></i>
+                                <span>قص الصور</span>
+                            </button>
+                            <button class="tool-btn" data-tool="rotator">
+                                <i class="fas fa-undo"></i>
+                                <span>تدوير الصور</span>
+                            </button>
+                            <button class="tool-btn" data-tool="watermark">
+                                <i class="fas fa-tint"></i>
+                                <span>علامة مائية</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Utility Tools -->
+                    <div class="category-card" data-category="utility">
+                        <div class="category-header">
+                            <i class="fas fa-tools"></i>
+                            <h3>أدوات المطورين</h3>
+                        </div>
+                        <div class="category-tools">
+                            <button class="tool-btn" data-tool="base64">
+                                <i class="fas fa-code"></i>
+                                <span>Base64</span>
+                            </button>
+                            <button class="tool-btn" data-tool="colors">
+                                <i class="fas fa-palette"></i>
+                                <span>استخراج الألوان</span>
+                            </button>
+                            <button class="tool-btn" data-tool="exif">
+                                <i class="fas fa-user-secret"></i>
+                                <span>إزالة EXIF</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Generator Tools -->
+                    <div class="category-card" data-category="generators">
+                        <div class="category-header">
+                            <i class="fas fa-magic"></i>
+                            <h3>أدوات التوليد</h3>
+                        </div>
+                        <div class="category-tools">
+                            <button class="tool-btn" data-tool="qr">
+                                <i class="fas fa-qrcode"></i>
+                                <span>مولد QR</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Google AdSense - Middle Banner -->
+            <div class="ad-container ad-middle">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-2108027030250763"
+                     data-ad-slot="0987654321"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
+
+            <!-- Tool Interface -->
+            <section class="tool-interface" id="tool-interface" style="display: none;">
+                <!-- File Upload Component -->
+                <div class="upload-section" id="upload-section">
+                    <!-- Will be populated by fileUpload.js -->
+                </div>
+
+                <!-- Preview Panel -->
+                <div class="preview-section" id="preview-section">
+                    <!-- Will be populated by previewPanel.js -->
+                </div>
+
+                <!-- Tool Controls -->
+                <div class="controls-section" id="controls-section">
+                    <!-- Will be populated by specific tool modules -->
+                </div>
+
+                <!-- Results Panel -->
+                <div class="results-section" id="results-section">
+                    <!-- Will be populated by resultsPanel.js -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Sidebar Ad -->
+    <aside class="sidebar-ad">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-2108027030250763"
+             data-ad-slot="1357924680"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+    </aside>
+
+    <!-- About Section -->
+    <section id="about" class="about-section" style="display: none;">
+        <div class="about-container">
+            <div class="about-header">
+                <h2>🎨 حول منصة معالجة الصور</h2>
+                <button class="close-about" onclick="closeAbout()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="about-content">
+                <div class="about-grid">
+                    <div class="about-card">
+                        <div class="about-icon">🚀</div>
+                        <h3>منصة شاملة</h3>
+                        <p>أدوات متكاملة لجميع احتياجات معالجة الصور من ضغط وتحويل وتحرير وإنشاء</p>
+                    </div>
+                    <div class="about-card">
+                        <div class="about-icon">⚡</div>
+                        <h3>سريعة وآمنة</h3>
+                        <p>معالجة محلية في متصفحك بدون رفع للخوادم، مما يضمن الخصوصية والسرعة</p>
+                    </div>
+                    <div class="about-card">
+                        <div class="about-icon">🎯</div>
+                        <h3>سهلة الاستخدام</h3>
+                        <p>واجهة بسيطة وسهلة مصممة لتكون متاحة للجميع</p>
+                    </div>
+                    <div class="about-card">
+                        <div class="about-icon">🌐</div>
+                        <h3>باللغة العربية</h3>
+                        <p>منصة عربية بالكامل مع دعم اتجاه النص من اليمين لليسار</p>
+                    </div>
+                </div>
+                
+                <div class="features-list">
+                    <h3>✨ الميزات الرئيسية</h3>
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <i class="fas fa-compress-alt"></i>
+                            <span>ضغط الصور مع الحفاظ على الجودة</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-exchange-alt"></i>
+                            <span>تحويل بين جميع تنسيقات الصور</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-expand-arrows-alt"></i>
+                            <span>تغيير الأحجام والأبعاد</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-crop-alt"></i>
+                            <span>قص وتدوير الصور</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-palette"></i>
+                            <span>استخراج الألوان والمرشحات</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-qrcode"></i>
+                            <span>مولدات QR والعلامات المائية</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-footer">
+                    <h3>📞 تواصل معنا</h3>
+                    <div class="contact-info">
+                        <p><strong>الموقع:</strong> <a href="https://mosap.tech" target="_blank">mosap.tech</a></p>
+                        <p><strong>البريد:</strong> info@mosap.tech</p>
+                        <p><strong>الإصدار:</strong> 1.0.0 Beta</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>أدوات الصور</h3>
+                    <p>منصة شاملة لمعالجة الصور بتقنيات متقدمة وآمنة</p>
+                </div>
+                <div class="footer-section">
+                    <h3>الأدوات</h3>
+                    <ul>
+                        <li><a href="#compressor">ضاغط الصور</a></li>
+                        <li><a href="#converter">محول الصيغ</a></li>
+                        <li><a href="#cropper">قص الصور</a></li>
+                        <li><a href="#qr">مولد QR</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>تواصل معنا</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Mosap.tech - جميع الحقوق محفوظة</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="loading-spinner">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>جاري المعالجة...</p>
+        </div>
+    </div>
+
+    <!-- Notification System -->
+    <div class="notification-container" id="notification-container"></div>
+
+    <!-- النسخة البسيطة التي تعمل فوراً -->
+    <script src="js/simple-main.js"></script>
+    
+    <!-- أنماط إضافية للنسخة البسيطة -->
+    <link rel="stylesheet" href="css/simple-styles.css">
+    
+    <!-- نسخة احتياطية مدمجة -->
+    <script>
+        // التحقق من تحميل المعالج البسيط
+        setTimeout(() => {
+            if (typeof simpleProcessor === 'undefined') {
+                console.warn('⚠️ فشل تحميل simple-main.js، استخدام النسخة الاحتياطية');
+                
+                // نسخة احتياطية مدمجة
+                window.fallbackProcessor = {
+                    init() {
+                        console.log('🔧 تشغيل النسخة الاحتياطية...');
+                        this.bindButtons();
+                        this.showWelcome();
+                    },
+                    
+                    bindButtons() {
+                        const buttons = document.querySelectorAll('.tool-btn');
+                        buttons.forEach(btn => {
+                            btn.addEventListener('click', (e) => {
+                                e.preventDefault();
+                                const toolName = btn.getAttribute('data-tool');
+                                this.selectTool(toolName, btn);
+                            });
+                        });
+                    },
+                    
+                    selectTool(toolName, btn) {
+                        // إزالة التحديد من جميع الأزرار
+                        document.querySelectorAll('.tool-btn').forEach(b => {
+                            b.style.background = '';
+                            b.style.boxShadow = '';
+                        });
+                        
+                        // تحديد الزر الحالي
+                        btn.style.background = 'linear-gradient(45deg, #3498db, #2ecc71)';
+                        btn.style.boxShadow = '0 0 20px rgba(52, 152, 219, 0.6)';
+                        
+                        // إظهار واجهة بسيطة
+                        this.showInterface(toolName);
+                        
+                        this.notify(`تم اختيار: ${this.getToolName(toolName)} 🔧`);
+                    },
+                    
+                    showInterface(toolName) {
+                        const toolInterface = document.getElementById('tool-interface');
+                        if (toolInterface) {
+                            toolInterface.style.display = 'block';
+                            toolInterface.innerHTML = `
+                                <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 15px; margin: 2rem 0; text-align: center;">
+                                    <h3 style="color: #3498db; margin-bottom: 1rem;">🔧 ${this.getToolName(toolName)}</h3>
+                                    <p>تم اختيار الأداة بنجاح!</p>
+                                    <p style="opacity: 0.7; font-size: 0.9rem;">النسخة الكاملة ستكون متاحة قريباً...</p>
+                                    <button onclick="window.fallbackProcessor.processDemo()" style="
+                                        background: linear-gradient(45deg, #3498db, #2ecc71);
+                                        color: white; border: none; padding: 1rem 2rem;
+                                        border-radius: 8px; cursor: pointer; font-size: 1rem;
+                                        margin-top: 1rem; transition: all 0.3s ease;">
+                                        🚀 تجربة الأداة
+                                    </button>
+                                </div>
+                            `;
+                            toolInterface.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                    },
+                    
+                    processDemo() {
+                        this.notify('🔄 جاري المعالجة...', 'info');
+                        setTimeout(() => {
+                            this.notify('✅ تمت المعالجة بنجاح! (نسخة تجريبية)', 'success');
+                        }, 2000);
+                    },
+                    
+                    getToolName(toolId) {
+                        const names = {
+                            'compressor': 'ضاغط الصور',
+                            'converter': 'محول التنسيق', 
+                            'resizer': 'تغيير الحجم',
+                            'cropper': 'قص الصور',
+                            'rotator': 'تدوير الصور',
+                            'watermark': 'العلامة المائية',
+                            'base64': 'تحويل Base64',
+                            'colors': 'استخراج الألوان',
+                            'exif': 'بيانات الصورة',
+                            'qr': 'مولد QR'
+                        };
+                        return names[toolId] || toolId;
+                    },
+                    
+                    notify(message, type = 'info') {
+                        console.log(`📢 ${message}`);
+                        
+                        // إنشاء إشعار
+                        const notification = document.createElement('div');
+                        const colors = {
+                            success: '#27ae60',
+                            error: '#e74c3c', 
+                            warning: '#f39c12',
+                            info: '#3498db'
+                        };
+                        
+                        notification.style.cssText = `
+                            position: fixed; top: 20px; right: 20px; z-index: 9999;
+                            background: ${colors[type] || colors.info}; color: white;
+                            padding: 1rem 1.5rem; border-radius: 8px; max-width: 300px;
+                            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+                            animation: slideIn 0.5s ease;
+                        `;
+                        notification.innerHTML = `
+                            ${message}
+                            <button onclick="this.parentElement.remove()" style="
+                                background: none; border: none; color: white; 
+                                float: left; margin-right: 1rem; cursor: pointer;
+                                font-size: 1.2rem; opacity: 0.8;">×</button>
+                        `;
+                        
+                        document.body.appendChild(notification);
+                        
+                        setTimeout(() => notification.remove(), 4000);
+                    },
+                    
+                    showWelcome() {
+                        setTimeout(() => {
+                            this.notify('🎨 مرحباً في منصة معالجة الصور!', 'success');
+                            setTimeout(() => {
+                                this.notify('👈 اختر أداة من الشريط الجانبي', 'info');
+                            }, 2000);
+                        }, 1000);
+                    }
+                };
+                
+                // تشغيل النسخة الاحتياطية
+                window.fallbackProcessor.init();
+                
+                // ربط زر "حول الموقع" مع تأخير
+                setTimeout(() => {
+                    if (window.setupAboutButton) {
+                        window.setupAboutButton();
+                    } else {
+                        console.log('⚠️ setupAboutButton غير متاحة، محاولة ربط مباشر...');
+                        // ربط مباشر كبديل
+                        document.querySelectorAll('a[href="#about"]').forEach(link => {
+                            link.onclick = function(e) {
+                                e.preventDefault();
+                                console.log('🖱️ تم النقر على رابط حول الموقع');
+                                const aboutSection = document.getElementById('about');
+                                if (aboutSection) {
+                                    aboutSection.style.display = 'block';
+                                    aboutSection.style.position = 'fixed';
+                                    aboutSection.style.top = '0';
+                                    aboutSection.style.left = '0';
+                                    aboutSection.style.width = '100%';
+                                    aboutSection.style.height = '100%';
+                                    aboutSection.style.zIndex = '10000';
+                                    aboutSection.style.background = 'rgba(0, 0, 0, 0.9)';
+                                    aboutSection.scrollIntoView();
+                                }
+                            };
+                        });
+                    }
+                }, 500);
+            } else {
+                console.log('✅ تم تحميل simple-main.js بنجاح');
+            }
+        }, 2000);
+        
+        // وظائف "حول الموقع" - محسنة
+        window.setupAboutButton = function() {
+            console.log('🔗 إعداد زر حول الموقع...');
+            
+            const aboutLinks = document.querySelectorAll('a[href="#about"]');
+            console.log(`📋 تم العثور على ${aboutLinks.length} روابط حول الموقع`);
+            
+            aboutLinks.forEach((link, index) => {
+                // إزالة المستمعات القديمة
+                link.removeEventListener('click', handleAboutClick);
+                // إضافة المستمع الجديد
+                link.addEventListener('click', handleAboutClick);
+                console.log(`✅ تم ربط الرابط رقم ${index + 1}`);
+            });
+        };
+        
+        function handleAboutClick(e) {
+            e.preventDefault();
+            console.log('🖱️ تم النقر على زر حول الموقع');
+            showAbout();
+        }
+        
+        // دالة فتح حول الموقع - محسنة مع تأثيرات زجاجية
+        window.showAbout = function() {
+            console.log('📖 فتح صفحة حول الموقع...');
+            const aboutSection = document.getElementById('about');
+            if (aboutSection) {
+                aboutSection.style.display = 'block';
+                aboutSection.style.position = 'fixed';
+                aboutSection.style.top = '0';
+                aboutSection.style.left = '0';
+                aboutSection.style.width = '100%';
+                aboutSection.style.height = '100%';
+                aboutSection.style.zIndex = '10000';
+                aboutSection.style.background = 'rgba(0, 0, 0, 0.95)';
+                aboutSection.style.backdropFilter = 'blur(30px)';
+                aboutSection.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+                aboutSection.style.opacity = '0';
+                aboutSection.style.transform = 'scale(0.9)';
+                
+                setTimeout(() => {
+                    aboutSection.style.opacity = '1';
+                    aboutSection.style.transform = 'scale(1)';
+                }, 50);
+                
+                aboutSection.scrollTop = 0;
+                document.body.style.overflow = 'hidden';
+            }
+        };
+        
+        // دالة إغلاق حول الموقع - محسنة مع تأثيرات
+        window.closeAbout = function() {
+            console.log('🔒 إغلاق صفحة حول الموقع...');
+            const aboutSection = document.getElementById('about');
+            if (aboutSection) {
+                aboutSection.style.opacity = '0';
+                aboutSection.style.transform = 'scale(0.9)';
+                setTimeout(() => {
+                    aboutSection.style.display = 'none';
+                    aboutSection.style.opacity = '';
+                    aboutSection.style.transform = '';
+                    document.body.style.overflow = 'auto';
+                }, 300);
+            }
+        };
+        
+        // إضافة أنماط للإنيميشن
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            
+            /* أنماط صفحة "حول الموقع" */
+            .about-section {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 2rem;
+            }
+            
+            .about-container {
+                background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+                border-radius: 20px;
+                padding: 0;
+                max-width: 800px;
+                width: 100%;
+                max-height: 90vh;
+                overflow-y: auto;
+                box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+                border: 1px solid rgba(255,255,255,0.2);
+                backdrop-filter: blur(20px);
+            }
+            
+            .about-header {
+                background: linear-gradient(45deg, #3498db, #2ecc71);
+                color: white;
+                padding: 2rem;
+                border-radius: 20px 20px 0 0;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            
+            .about-header h2 {
+                margin: 0;
+                font-size: 2rem;
+            }
+            
+            .close-about {
+                background: rgba(255,255,255,0.2);
+                border: none;
+                color: white;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                cursor: pointer;
+                font-size: 1.5rem;
+                transition: all 0.3s ease;
+            }
+            
+            .close-about:hover {
+                background: rgba(255,255,255,0.3);
+                transform: scale(1.1);
+            }
+            
+            .about-content {
+                padding: 2rem;
+                color: white;
+            }
+            
+            .about-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 1.5rem;
+                margin-bottom: 2rem;
+            }
+            
+            .about-card {
+                background: rgba(255,255,255,0.1);
+                padding: 1.5rem;
+                border-radius: 15px;
+                text-align: center;
+                border: 1px solid rgba(255,255,255,0.1);
+                transition: all 0.3s ease;
+            }
+            
+            .about-card:hover {
+                background: rgba(255,255,255,0.15);
+                transform: translateY(-5px);
+            }
+            
+            .about-icon {
+                font-size: 3rem;
+                margin-bottom: 1rem;
+            }
+            
+            .about-card h3 {
+                color: #3498db;
+                margin-bottom: 1rem;
+            }
+            
+            .about-card p {
+                color: rgba(255,255,255,0.9);
+                line-height: 1.6;
+            }
+            
+            .features-list h3 {
+                color: #2ecc71;
+                margin-bottom: 1.5rem;
+                text-align: center;
+                font-size: 1.5rem;
+            }
+            
+            .features-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 1rem;
+                margin-bottom: 2rem;
+            }
+            
+            .feature-item {
+                display: flex;
+                align-items: center;
+                background: rgba(255,255,255,0.05);
+                padding: 1rem;
+                border-radius: 10px;
+                border: 1px solid rgba(255,255,255,0.1);
+            }
+            
+            .feature-item i {
+                color: #3498db;
+                font-size: 1.5rem;
+                margin-left: 1rem;
+                width: 30px;
+            }
+            
+            .feature-item span {
+                color: rgba(255,255,255,0.9);
+            }
+            
+            .about-footer {
+                background: rgba(255,255,255,0.05);
+                padding: 1.5rem;
+                border-radius: 15px;
+                text-align: center;
+                border: 1px solid rgba(255,255,255,0.1);
+            }
+            
+            .about-footer h3 {
+                color: #f39c12;
+                margin-bottom: 1rem;
+            }
+            
+            .contact-info p {
+                margin: 0.5rem 0;
+                color: rgba(255,255,255,0.9);
+            }
+            
+            .contact-info a {
+                color: #3498db;
+                text-decoration: none;
+                transition: color 0.3s ease;
+            }
+            
+            .contact-info a:hover {
+                color: #2ecc71;
+                text-decoration: underline;
+            }
+            
+            @media (max-width: 768px) {
+                .about-container {
+                    margin: 1rem;
+                    max-height: 95vh;
+                }
+                
+                .about-header {
+                    padding: 1.5rem;
+                }
+                
+                .about-header h2 {
+                    font-size: 1.5rem;
+                }
+                
+                .about-content {
+                    padding: 1.5rem;
+                }
+                
+                .about-grid {
+                    grid-template-columns: 1fr;
+                }
+                
+                .features-grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+
+    <!-- Initialize AdSense -->
+    <script>
+        window.addEventListener('load', function() {
+            // Initialize AdSense ads
+            (adsbygoogle = window.adsbygoogle || []).push({});
+            (adsbygoogle = window.adsbygoogle || []).push({});
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        });
+    </script>
+</body>
+</html>
