@@ -2200,6 +2200,12 @@ class SimpleImageProcessor {
         console.log('🔗 إضافة العنصر إلى قسم النتائج...');
         resultsSection.appendChild(resultElement);
         
+        // تسجيل استخدام الأداة في نظام الإدارة
+        if (window.siteManager) {
+            window.siteManager.recordDownload(type);
+            console.log('📊 تم تسجيل استخدام أداة:', type);
+        }
+        
         console.log('🎯 التمرير إلى النتيجة...');
         resultElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
         
