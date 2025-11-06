@@ -138,6 +138,9 @@ class SiteManager {
         if (this.adsenseSettings.enabled) {
             this.injectAdSenseAds();
         }
+        
+        // تطبيق الإعلانات النصية
+        this.loadTextAdSettings();
     }
 
     // حقن Google Analytics
@@ -238,6 +241,96 @@ class SiteManager {
             uptime: '99.8%', // يمكن حسابها بناءً على وقت تشغيل الخادم
             earnings: '$0.00' // يحتاج ربط مع AdSense API
         };
+    }
+
+    // تحميل وتطبيق إعدادات الإعلانات النصية
+    loadTextAdSettings() {
+        const textAdSettings = localStorage.getItem('text-ad-settings');
+        if (textAdSettings) {
+            try {
+                const settings = JSON.parse(textAdSettings);
+                if (settings.enabled) {
+                    this.displayTextAd(settings);
+                }
+            } catch (e) {
+                console.warn('فشل في تحميل إعدادات الإعلان النصي:', e);
+            }
+        }
+    }
+
+    // عرض الإعلان النصي
+    displayTextAd(settings) {
+        // إنشاء الإعلان النصي إذا لم يكن موجوداً
+        let textAdBanner = document.getElementById('text-ad-banner');
+        if (!textAdBanner) {
+            const header = document.querySelector('.header');
+            if (!header) return;
+
+            textAdBanner = document.createElement('div');
+            textAdBanner.id = 'text-ad-banner';
+            textAdBanner.className = 'text-ad-banner';
+            textAdBanner.innerHTML = `
+                <button class="text-ad-close" onclick="this.parentElement.classList.add('hidden'); siteManager.recordTextAdClose();">&times;</button>
+                <div class="text-ad-content">
+                    <div class="text-ad-title"></div>
+                    <div class="text-ad-description"></div>
+                    <a href="#" class="text-ad-cta" target="_blank" onclick="siteManager.recordTextAdClick();"></a>
+                </div>
+            `;
+            header.insertAdjacentElement('afterend', textAdBanner);
+        }
+
+        // تطبيق المحتوى
+        const title = textAdBanner.querySelector('.text-ad-title');
+        const description = textAdBanner.querySelector('.text-ad-description');
+        const cta = textAdBanner.querySelector('.text-ad-cta');
+
+        if (title) title.textContent = settings.title || '';
+        if (description) description.textContent = settings.description || '';
+        if (cta) {
+            cta.textContent = settings.ctaText || 'اضغط هنا';
+            cta.href = settings.ctaUrl || '#';
+        }
+
+        // تطبيق اللون
+        if (settings.color) {
+            const colorMap = {
+                blue: '#007AFF',
+                green: '#28a745',
+                red: '#dc3545',
+                orange: '#fd7e14',
+                purple: '#6f42c1',
+                gray: '#6c757d'
+            };
+            
+            if (title) title.style.color = colorMap[settings.color];
+            if (cta) cta.style.backgroundColor = colorMap[settings.color];
+        }
+
+        // إظهار الإعلان مع تسجيل ظهور
+        textAdBanner.classList.remove('hidden');
+        textAdBanner.classList.add('fade-in');
+        this.recordTextAdImpression();
+    }
+
+    // تسجيل ظهور الإعلان النصي
+    recordTextAdImpression() {
+        const stats = JSON.parse(localStorage.getItem('text-ad-stats') || '{"impressions": 0, "clicks": 0}');
+        stats.impressions++;
+        localStorage.setItem('text-ad-stats', JSON.stringify(stats));
+    }
+
+    // تسجيل نقرة على الإعلان النصي
+    recordTextAdClick() {
+        const stats = JSON.parse(localStorage.getItem('text-ad-stats') || '{"impressions": 0, "clicks": 0}');
+        stats.clicks++;
+        localStorage.setItem('text-ad-stats', JSON.stringify(stats));
+    }
+
+    // تسجيل إغلاق الإعلان النصي
+    recordTextAdClose() {
+        // يمكن إضافة إحصائيات إضافية هنا
+        console.log('تم إغلاق الإعلان النصي');
     }
 
     // إضافة مناطق للإعلانات في الصفحة

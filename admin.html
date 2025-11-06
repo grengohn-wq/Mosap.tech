@@ -373,6 +373,10 @@
                     <i class="fas fa-chart-bar"></i>
                     التحليلات
                 </button>
+                <button class="tab-button" onclick="switchTab('textads')">
+                    <i class="fas fa-bullhorn"></i>
+                    الإعلانات النصية
+                </button>
                 <button class="tab-button" onclick="switchTab('settings')">
                     <i class="fas fa-cogs"></i>
                     إعدادات الموقع
@@ -516,6 +520,99 @@
 
                 <div class="success-message" id="settings-success">
                     تم حفظ إعدادات الموقع بنجاح!
+                </div>
+            </div>
+
+            <!-- Text Ads Tab -->
+            <div id="textads-tab" class="tab-content">
+                <h3><i class="fas fa-bullhorn"></i> إدارة الإعلانات النصية</h3>
+                <p style="color: #666; margin-bottom: 2rem;">أنشئ إعلانات نصية مخصصة تظهر في أعلى الموقع لجميع الزوار</p>
+                
+                <div class="form-group">
+                    <label for="text-ad-enabled">تفعيل الإعلان النصي</label>
+                    <select id="text-ad-enabled">
+                        <option value="false">مُعطل</option>
+                        <option value="true">مُفعل</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="text-ad-title">عنوان الإعلان *</label>
+                    <input type="text" id="text-ad-title" placeholder="اكتب عنواناً جذاباً للإعلان" maxlength="60">
+                    <small style="color: #666;">الحد الأقصى 60 حرف</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="text-ad-description">وصف الإعلان *</label>
+                    <textarea id="text-ad-description" placeholder="اكتب وصفاً مختصراً وجذاباً للإعلان" maxlength="120" rows="3"></textarea>
+                    <small style="color: #666;">الحد الأقصى 120 حرف</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="text-ad-cta-text">نص الزر</label>
+                    <input type="text" id="text-ad-cta-text" placeholder="اضغط هنا" maxlength="20" value="اضغط هنا">
+                    <small style="color: #666;">الحد الأقصى 20 حرف</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="text-ad-url">رابط الإعلان *</label>
+                    <input type="url" id="text-ad-url" placeholder="https://example.com">
+                    <small style="color: #666;">الرابط الذي سيتم توجيه الزوار إليه</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="text-ad-color">لون الإعلان</label>
+                    <select id="text-ad-color">
+                        <option value="blue">أزرق (افتراضي)</option>
+                        <option value="green">أخضر</option>
+                        <option value="red">أحمر</option>
+                        <option value="orange">برتقالي</option>
+                        <option value="purple">بنفسجي</option>
+                        <option value="gray">رمادي</option>
+                    </select>
+                </div>
+
+                <div style="background: #f8f9ff; padding: 15px; border-radius: 8px; margin: 20px 0;">
+                    <h4 style="color: #007AFF; margin: 0 0 10px 0;">معاينة الإعلان:</h4>
+                    <div id="text-ad-preview" class="text-ad-banner">
+                        <div class="text-ad-content">
+                            <div class="text-ad-title">عنوان الإعلان سيظهر هنا</div>
+                            <div class="text-ad-description">وصف الإعلان سيظهر هنا مع تفاصيل مختصرة وجذابة</div>
+                            <a href="#" class="text-ad-cta">اضغط هنا</a>
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="saveTextAdSettings()" class="btn btn-success">
+                    <i class="fas fa-save"></i>
+                    حفظ إعدادات الإعلان
+                </button>
+
+                <button onclick="previewTextAd()" class="btn" style="background: #17a2b8; margin-right: 10px;">
+                    <i class="fas fa-eye"></i>
+                    معاينة في الموقع
+                </button>
+
+                <div class="success-message" id="textads-success">
+                    تم حفظ إعدادات الإعلان النصي بنجاح!
+                </div>
+
+                <div style="margin-top: 30px; padding: 20px; background: #fff3cd; border-radius: 8px;">
+                    <h4 style="color: #856404; margin: 0 0 10px 0;">📊 إحصائيات الإعلان:</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-top: 15px;">
+                        <div style="text-align: center;">
+                            <div style="font-size: 1.5rem; font-weight: 700; color: #007AFF;" id="ad-impressions">0</div>
+                            <small>مرات الظهور</small>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 1.5rem; font-weight: 700; color: #28a745;" id="ad-clicks">0</div>
+                            <small>النقرات</small>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 1.5rem; font-weight: 700; color: #ffc107;" id="ad-ctr">0%</div>
+                            <small>معدل النقر</small>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -697,7 +794,119 @@
                 document.getElementById('google-analytics').value = settings.googleAnalytics || '';
                 document.getElementById('maintenance-mode').value = settings.maintenanceMode || 'off';
             }
+            
+            // تحميل إعدادات الإعلانات النصية
+            const savedTextAds = localStorage.getItem('text-ad-settings');
+            if (savedTextAds) {
+                const settings = JSON.parse(savedTextAds);
+                document.getElementById('text-ad-enabled').value = settings.enabled || 'false';
+                document.getElementById('text-ad-title').value = settings.title || '';
+                document.getElementById('text-ad-description').value = settings.description || '';
+                document.getElementById('text-ad-cta-text').value = settings.ctaText || 'اضغط هنا';
+                document.getElementById('text-ad-url').value = settings.ctaUrl || '';
+                document.getElementById('text-ad-color').value = settings.color || 'blue';
+                updateTextAdPreview();
+                updateTextAdStats();
+            }
+            
+            // ربط أحداث المعاينة الفورية
+            document.getElementById('text-ad-title').addEventListener('input', updateTextAdPreview);
+            document.getElementById('text-ad-description').addEventListener('input', updateTextAdPreview);
+            document.getElementById('text-ad-cta-text').addEventListener('input', updateTextAdPreview);
+            document.getElementById('text-ad-color').addEventListener('change', updateTextAdPreview);
         });
+        
+        // وظائف الإعلانات النصية
+        function saveTextAdSettings() {
+            const enabled = document.getElementById('text-ad-enabled').value === 'true';
+            const title = document.getElementById('text-ad-title').value;
+            const description = document.getElementById('text-ad-description').value;
+            const ctaText = document.getElementById('text-ad-cta-text').value;
+            const ctaUrl = document.getElementById('text-ad-url').value;
+            const color = document.getElementById('text-ad-color').value;
+            
+            // التحقق من صحة البيانات
+            if (enabled && (!title.trim() || !description.trim() || !ctaUrl.trim())) {
+                alert('يرجى ملء جميع الحقول المطلوبة');
+                return;
+            }
+            
+            const settings = {
+                enabled,
+                title: title.trim(),
+                description: description.trim(),
+                ctaText: ctaText.trim() || 'اضغط هنا',
+                ctaUrl: ctaUrl.trim(),
+                color,
+                createdAt: new Date().toISOString(),
+                lastUpdated: new Date().toISOString()
+            };
+            
+            localStorage.setItem('text-ad-settings', JSON.stringify(settings));
+            
+            // إظهار رسالة النجاح
+            const successMessage = document.getElementById('textads-success');
+            successMessage.style.display = 'block';
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+            }, 3000);
+            
+            console.log('تم حفظ إعدادات الإعلان النصي:', settings);
+        }
+        
+        function updateTextAdPreview() {
+            const title = document.getElementById('text-ad-title').value || 'عنوان الإعلان سيظهر هنا';
+            const description = document.getElementById('text-ad-description').value || 'وصف الإعلان سيظهر هنا مع تفاصيل مختصرة وجذابة';
+            const ctaText = document.getElementById('text-ad-cta-text').value || 'اضغط هنا';
+            const color = document.getElementById('text-ad-color').value || 'blue';
+            
+            const preview = document.getElementById('text-ad-preview');
+            const titleEl = preview.querySelector('.text-ad-title');
+            const descEl = preview.querySelector('.text-ad-description');
+            const ctaEl = preview.querySelector('.text-ad-cta');
+            
+            titleEl.textContent = title;
+            descEl.textContent = description;
+            ctaEl.textContent = ctaText;
+            
+            // تطبيق اللون
+            const colorMap = {
+                blue: '#007AFF',
+                green: '#28a745',
+                red: '#dc3545',
+                orange: '#fd7e14',
+                purple: '#6f42c1',
+                gray: '#6c757d'
+            };
+            
+            titleEl.style.color = colorMap[color];
+            ctaEl.style.backgroundColor = colorMap[color];
+        }
+        
+        function previewTextAd() {
+            // حفظ الإعدادات أولاً
+            saveTextAdSettings();
+            
+            // فتح نافذة جديدة للمعاينة
+            const previewWindow = window.open('index.html', '_blank');
+            
+            setTimeout(() => {
+                if (previewWindow) {
+                    previewWindow.focus();
+                }
+            }, 1000);
+        }
+        
+        function updateTextAdStats() {
+            // الحصول على إحصائيات الإعلان من localStorage
+            const stats = JSON.parse(localStorage.getItem('text-ad-stats') || '{"impressions": 0, "clicks": 0}');
+            
+            document.getElementById('ad-impressions').textContent = stats.impressions.toLocaleString();
+            document.getElementById('ad-clicks').textContent = stats.clicks.toLocaleString();
+            
+            const ctr = stats.impressions > 0 ? ((stats.clicks / stats.impressions) * 100).toFixed(2) : 0;
+            document.getElementById('ad-ctr').textContent = `${ctr}%`;
+        }
         
         // تحديث الإحصائيات كل دقيقة
         setInterval(updateStats, 60000);

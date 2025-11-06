@@ -23,13 +23,15 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/responsive-advanced.css">
     
     <!-- External Libraries -->
     <script src="https://unpkg.com/compressorjs@1.2.1/dist/compressor.min.js" defer></script>
     <script src="https://unpkg.com/qrcode@1.5.3/build/qrcode.min.js" defer></script>
     
-    <!-- Site Management System -->
+    <!-- Advanced Systems -->
     <script src="js/site-manager.js"></script>
+    <script src="js/device-detector.js"></script>
     
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -38,7 +40,9 @@
     <link rel="preload" href="css/style.css" as="style">
     <link rel="preload" href="js/simple-main.js" as="script">
 </head>
-<body>
+<body class="ios-safe-area">
+    <!-- Device Detector (Hidden) -->
+    <div class="device-indicator device-type"></div>
     <!-- Header -->
     <header class="header">
         <div class="container">

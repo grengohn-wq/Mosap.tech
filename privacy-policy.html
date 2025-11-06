@@ -6,11 +6,13 @@
     <title>سياسة الخصوصية - Mosap.tech</title>
     <meta name="description" content="سياسة الخصوصية وحماية البيانات في موقع أدوات معالجة الصور Mosap.tech">
     <link rel="stylesheet" href="css/simple-styles.css">
+    <link rel="stylesheet" href="css/responsive-advanced.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
     
-    <!-- Site Management System -->
+    <!-- Advanced Systems -->
     <script src="js/site-manager.js"></script>
+    <script src="js/device-detector.js"></script>
     <style>
         .policy-content {
             max-width: 800px;
@@ -71,7 +73,9 @@
         }
     </style>
 </head>
-<body>
+<body class="ios-safe-area">
+    <!-- Device Detector (Hidden) -->
+    <div class="device-indicator device-type"></div>
     <header class="header">
         <div class="container">
             <div class="header-content">
