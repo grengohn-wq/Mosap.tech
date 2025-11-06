@@ -526,11 +526,28 @@
             <!-- Text Ads Tab -->
             <div id="textads-tab" class="tab-content">
                 <h3><i class="fas fa-bullhorn"></i> إدارة الإعلانات النصية</h3>
-                <p style="color: #666; margin-bottom: 2rem;">أنشئ إعلانات نصية مخصصة تظهر في أعلى الموقع لجميع الزوار</p>
+                <p style="color: #666; margin-bottom: 1rem;">أنشئ إعلانات نصية مخصصة تظهر في أعلى الموقع لجميع الزوار</p>
+                
+                <!-- حالة الإعلان الحالي -->
+                <div id="current-ad-status" style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 2rem; border-left: 4px solid #007AFF;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <h4 style="margin: 0 0 5px 0; color: #333;">
+                                <i class="fas fa-info-circle"></i>
+                                حالة الإعلان الحالي
+                            </h4>
+                            <span id="ad-status-text" style="color: #666;">لا يوجد إعلان نشط</span>
+                        </div>
+                        <div>
+                            <span id="ad-status-badge" class="badge" style="padding: 5px 10px; border-radius: 15px; font-size: 12px; background: #6c757d; color: white;">معطل</span>
+                        </div>
+                    </div>
+                    <div id="current-ad-preview" style="margin-top: 10px; display: none;"></div>
+                </div>
                 
                 <div class="form-group">
                     <label for="text-ad-enabled">تفعيل الإعلان النصي</label>
-                    <select id="text-ad-enabled">
+                    <select id="text-ad-enabled" onchange="updateAdStatus()">
                         <option value="false">مُعطل</option>
                         <option value="true">مُفعل</option>
                     </select>
@@ -593,8 +610,17 @@
                     معاينة في الموقع
                 </button>
 
+                <button onclick="deleteTextAd()" class="btn btn-danger" style="margin-right: 10px;">
+                    <i class="fas fa-trash"></i>
+                    حذف الإعلان نهائياً
+                </button>
+
                 <div class="success-message" id="textads-success">
                     تم حفظ إعدادات الإعلان النصي بنجاح!
+                </div>
+
+                <div class="success-message" id="textads-delete-success" style="background: #f8d7da; color: #721c24; display: none;">
+                    تم حذف الإعلان النصي بنجاح!
                 </div>
 
                 <div style="margin-top: 30px; padding: 20px; background: #fff3cd; border-radius: 8px;">
@@ -807,10 +833,17 @@
                 document.getElementById('text-ad-color').value = settings.color || 'blue';
                 updateTextAdPreview();
                 updateTextAdStats();
+                updateAdStatus();
+            } else {
+                // في حالة عدم وجود إعلان محفوظ
+                updateAdStatus();
             }
             
             // ربط أحداث المعاينة الفورية
-            document.getElementById('text-ad-title').addEventListener('input', updateTextAdPreview);
+            document.getElementById('text-ad-title').addEventListener('input', function() {
+                updateTextAdPreview();
+                updateAdStatus();
+            });
             document.getElementById('text-ad-description').addEventListener('input', updateTextAdPreview);
             document.getElementById('text-ad-cta-text').addEventListener('input', updateTextAdPreview);
             document.getElementById('text-ad-color').addEventListener('change', updateTextAdPreview);
@@ -843,6 +876,9 @@
             };
             
             localStorage.setItem('text-ad-settings', JSON.stringify(settings));
+            
+            // تحديث حالة الإعلان
+            updateAdStatus();
             
             // إظهار رسالة النجاح
             const successMessage = document.getElementById('textads-success');
@@ -906,6 +942,85 @@
             
             const ctr = stats.impressions > 0 ? ((stats.clicks / stats.impressions) * 100).toFixed(2) : 0;
             document.getElementById('ad-ctr').textContent = `${ctr}%`;
+        }
+        
+        // حذف الإعلان النصي نهائياً
+        function deleteTextAd() {
+            if (confirm('هل أنت متأكد من حذف الإعلان النصي نهائياً؟\nسيتم حذف جميع البيانات والإحصائيات!')) {
+                // حذف إعدادات الإعلان
+                localStorage.removeItem('text-ad-settings');
+                
+                // حذف إحصائيات الإعلان
+                localStorage.removeItem('text-ad-stats');
+                
+                // إعادة تعيين النموذج
+                document.getElementById('text-ad-enabled').value = 'false';
+                document.getElementById('text-ad-title').value = '';
+                document.getElementById('text-ad-description').value = '';
+                document.getElementById('text-ad-cta-text').value = 'اضغط هنا';
+                document.getElementById('text-ad-url').value = '';
+                document.getElementById('text-ad-color').value = 'blue';
+                
+                // تحديث المعاينة
+                updateTextAdPreview();
+                updateAdStatus();
+                updateTextAdStats();
+                
+                // إظهار رسالة النجاح
+                const deleteMessage = document.getElementById('textads-delete-success');
+                deleteMessage.style.display = 'block';
+                setTimeout(() => {
+                    deleteMessage.style.display = 'none';
+                }, 3000);
+                
+                // إخفاء الإعلان من الموقع فوراً
+                hideTextAdOnSite();
+                
+                console.log('تم حذف الإعلان النصي نهائياً');
+            }
+        }
+        
+        // إخفاء الإعلان من الموقع فوراً
+        function hideTextAdOnSite() {
+            // في حالة وجود نوافذ مفتوحة للموقع، إخفاء الإعلان
+            try {
+                const textAdBanner = document.getElementById('text-ad-banner');
+                if (textAdBanner) {
+                    textAdBanner.classList.add('hidden');
+                    textAdBanner.remove();
+                }
+            } catch (e) {
+                console.log('لا توجد نوافذ موقع مفتوحة');
+            }
+        }
+        
+        // تحديث حالة الإعلان
+        function updateAdStatus() {
+            const enabled = document.getElementById('text-ad-enabled').value === 'true';
+            const title = document.getElementById('text-ad-title').value;
+            const statusText = document.getElementById('ad-status-text');
+            const statusBadge = document.getElementById('ad-status-badge');
+            const currentPreview = document.getElementById('current-ad-preview');
+            
+            if (enabled && title.trim()) {
+                statusText.textContent = `إعلان نشط: "${title.trim().substring(0, 30)}${title.length > 30 ? '...' : ''}"`;
+                statusBadge.textContent = 'نشط';
+                statusBadge.style.background = '#28a745';
+                
+                // إظهار معاينة صغيرة للإعلان الحالي
+                currentPreview.innerHTML = `
+                    <div style="background: #e9ecef; padding: 8px; border-radius: 4px; font-size: 12px; margin-top: 5px;">
+                        <strong>${title.trim()}</strong><br>
+                        <span style="color: #666;">${document.getElementById('text-ad-description').value}</span>
+                    </div>
+                `;
+                currentPreview.style.display = 'block';
+            } else {
+                statusText.textContent = 'لا يوجد إعلان نشط';
+                statusBadge.textContent = 'معطل';
+                statusBadge.style.background = '#6c757d';
+                currentPreview.style.display = 'none';
+            }
         }
         
         // تحديث الإحصائيات كل دقيقة

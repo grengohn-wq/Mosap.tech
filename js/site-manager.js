@@ -251,10 +251,28 @@ class SiteManager {
                 const settings = JSON.parse(textAdSettings);
                 if (settings.enabled) {
                     this.displayTextAd(settings);
+                } else {
+                    this.hideTextAd();
                 }
             } catch (e) {
                 console.warn('فشل في تحميل إعدادات الإعلان النصي:', e);
             }
+        } else {
+            this.hideTextAd();
+        }
+    }
+
+    // إخفاء الإعلان النصي
+    hideTextAd() {
+        const textAdBanner = document.getElementById('text-ad-banner');
+        if (textAdBanner) {
+            textAdBanner.classList.add('hidden');
+            // إزالة العنصر بالكامل بعد الانيميشن
+            setTimeout(() => {
+                if (textAdBanner.parentNode) {
+                    textAdBanner.parentNode.removeChild(textAdBanner);
+                }
+            }, 300);
         }
     }
 
@@ -353,6 +371,11 @@ class SiteManager {
             footer.insertAdjacentElement('beforebegin', footerAd);
         }
     }
+
+    // إعادة تحميل الإعلانات النصية (للاستخدام الخارجي)
+    refreshTextAd() {
+        this.loadTextAdSettings();
+    }
 }
 
 // إنشاء مثيل عام من مدير الموقع
@@ -368,6 +391,27 @@ document.addEventListener('DOMContentLoaded', function() {
     // إضافة مناطق الإعلانات
     siteManager.addAdZones();
 });
+
+// مراقبة تغييرات الإعلانات النصية
+setInterval(function() {
+    if (window.siteManager) {
+        const textAdSettings = localStorage.getItem('text-ad-settings');
+        const currentAd = document.getElementById('text-ad-banner');
+        
+        if (!textAdSettings || !JSON.parse(textAdSettings).enabled) {
+            // إذا تم حذف الإعلان أو تعطيله، إخفاؤه فوراً
+            if (currentAd && !currentAd.classList.contains('hidden')) {
+                window.siteManager.hideTextAd();
+            }
+        } else {
+            // إذا تم تفعيل إعلان جديد أو تحديث موجود
+            const settings = JSON.parse(textAdSettings);
+            if (!currentAd || currentAd.classList.contains('hidden')) {
+                window.siteManager.displayTextAd(settings);
+            }
+        }
+    }
+}, 2000); // فحص كل ثانيتين
 
 // تصدير للاستخدام العام
 window.SiteManager = SiteManager;
